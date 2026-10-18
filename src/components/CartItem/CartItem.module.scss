@@ -7,6 +7,7 @@
   gap: 16px;
   border: 2px solid var(--elements-color);
   padding: 16px;
+  cursor: pointer;
 
   @include on-tablet {
     flex-direction: row;

@@ -12,23 +12,25 @@ export const useCart = () => {
 
   const { cartItems, setCartItems } = context;
 
+  const handleRemoveFromCart = (itemId: string) => {
+    const updatedItems = cartItems.filter(item => item.itemId !== itemId);
+
+    setCartItems(updatedItems);
+    saveCartItems(updatedItems);
+  };
+
   const handleAddToCart = (item: CartItem) => {
     const existingItem = cartItems.find(
       cartItem => cartItem.itemId === item.itemId,
     );
 
     if (existingItem) {
+      handleRemoveFromCart(item.itemId);
+
       return;
     }
 
     const updatedItems = [...cartItems, { ...item, quantity: 1 }];
-
-    setCartItems(updatedItems);
-    saveCartItems(updatedItems);
-  };
-
-  const handleRemoveFromCart = (itemId: string) => {
-    const updatedItems = cartItems.filter(item => item.itemId !== itemId);
 
     setCartItems(updatedItems);
     saveCartItems(updatedItems);
